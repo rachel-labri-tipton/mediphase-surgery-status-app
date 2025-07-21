@@ -13,7 +13,6 @@ export default {
   		colors: {
   			background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        border: 'hsl(var(--border))',
         borderColor: {
           border: 'hsl(var(--border))',
         },
