@@ -16,7 +16,7 @@ const Home = () => {
         Simple, secure, and compassionate care at your fingertips.
       </p>
 
-      <div className='flex flex-col gap-[30px] justify-center md:flex-row md:gap-[100px]'>
+      <div className='flex flex-col gap-[30px] justify-center md:flex-row md:gap-[100px] mb-[100px]'>
         <Link to={'/sign-in'}>
           <Button  variant="default"className="w-[185px] h-[68px] rounded-xl bg-[#32AA2A] text-white">
             Sign in
