@@ -4,6 +4,7 @@ import './index.css';
 import App from './App.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router';
 import SignIn from './screens/SignIn.tsx';
+import PatientStatusBoard from './screens/StatusBoard.tsx';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,11 @@ const router = createBrowserRouter([
     path: '/sign-in',
     Component: SignIn,
   },
+  {
+    path: '/patient-status-board',
+    Component: PatientStatusBoard,
+  }
+
 ]);
 
 createRoot(document.getElementById('root')!).render(
