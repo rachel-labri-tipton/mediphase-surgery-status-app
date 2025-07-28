@@ -4,7 +4,7 @@ import './index.css';
 import App from './App.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router';
 import SignIn from './screens/SignIn.tsx';
-import PatientStatusBoard from './screens/StatusBoard.tsx';
+import PatientStatusBoard from './screens/PatientStatusBoard.tsx';
 
 const router = createBrowserRouter([
   {
