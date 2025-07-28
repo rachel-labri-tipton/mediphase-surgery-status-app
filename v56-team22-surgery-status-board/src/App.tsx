@@ -1,17 +1,10 @@
-
-import { Button } from './components/ui/button';
-import { Link } from 'react-router';
 import MainLayout from './layout/MainLayout';
+import SignIn from './components/SignIn';
 
-function App() {
-
-  return (
-      <MainLayout>
-        <Link to="/sign-in">
-          <Button>Sign in</Button>
-        </Link>
-      </MainLayout>
-  );
-}
+const App = () => (
+  <MainLayout>
+    <SignIn />
+  </MainLayout>
+);
 
 export default App;

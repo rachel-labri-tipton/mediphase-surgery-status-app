@@ -3,16 +3,11 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router';
-import SignIn from './screens/SignIn.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     Component: App,
-  },
-  {
-    path: '/sign-in',
-    Component: SignIn,
   },
 ]);
 
