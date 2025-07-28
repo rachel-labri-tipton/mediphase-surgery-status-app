@@ -1,5 +1,8 @@
+import React from "react"
 import {
   type ColumnDef,
+  type ColumnFiltersState,
+  getFilteredRowModel,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -13,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Input } from "../ui/input"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -23,16 +27,33 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  )
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      columnFilters,
+    },
   })
 
   return (
     <div className="flex items-center justify-center">
     <div className="w-4/5 md:w-2/3 mx-auto rounded-md border px-2 md:px-6">
-      
+    <div className="flex items-center py-4">
+      <Input
+        placeholder="Search Patient ID..."
+        value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
+        onChange={(event) =>
+          table.getColumn("id")?.setFilterValue(event.target.value)
+        }
+        className="max-w-sm"
+          />
+          </div>
       <Table className="my-8">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
