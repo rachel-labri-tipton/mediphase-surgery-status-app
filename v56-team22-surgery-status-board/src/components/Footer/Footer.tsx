@@ -19,7 +19,8 @@ const devNames = [
     github: 'https://github.com/rachel-labri-tipton',
     linkedin: 'https://www.linkedin.com/in/rachel-labri-tipton',
   },
-  { name: 'Rapha', github: 'https://github.com/Excalibur097', linkedin: '' },
+  { name: 'Rapha', 
+  github: 'https://github.com/Excalibur097'},
 ];
 
 const pages = [
