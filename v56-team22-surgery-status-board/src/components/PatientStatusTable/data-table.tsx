@@ -2,10 +2,12 @@ import React from "react"
 import {
   type ColumnDef,
   type ColumnFiltersState,
+  type VisibilityState,
   getFilteredRowModel,
   flexRender,
   getCoreRowModel,
   useReactTable,
+  ColumnVisibility,
 } from "@tanstack/react-table"
 
 import {
@@ -17,6 +19,15 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Input } from "../ui/input"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Button } from "../ui/button"
+import ColumnVisibilityDropdown from "./ColumnVisibilityDropdown"
+
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -30,14 +41,18 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
     state: {
       columnFilters,
+      columnVisibility,
     },
   })
 
@@ -53,6 +68,7 @@ export function DataTable<TData, TValue>({
         }
         className="max-w-sm"
           />
+         <ColumnVisibilityDropdown table={table} />
           </div>
       <Table className="my-8">
         <TableHeader>
