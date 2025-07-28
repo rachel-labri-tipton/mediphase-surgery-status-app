@@ -1,8 +1,8 @@
 import React from "react"
-import React from "react"
 import {
   type ColumnDef,
   type ColumnFiltersState,
+  type VisibilityState,
   getFilteredRowModel,
   flexRender,
   getCoreRowModel,
@@ -19,9 +19,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Input } from "../ui/input"
-import { Input } from "../ui/input"
-import ColumnVisibilityDropdown from "./ColumnVisibilityDropdown"
-
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -34,9 +31,7 @@ export function DataTable<TData, TValue>({
   data,
   role,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
+
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
@@ -48,8 +43,10 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
     state: {
       columnFilters,
+      columnVisibility,
     },
   })
 
@@ -65,6 +62,7 @@ export function DataTable<TData, TValue>({
         }
         className="max-w-sm"
           />
+         <ColumnVisibilityDropdown table={table} />
           </div>
       <Table className="my-8">
         <TableHeader>
