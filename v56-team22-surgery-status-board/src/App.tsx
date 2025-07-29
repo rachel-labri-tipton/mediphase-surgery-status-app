@@ -1,10 +1,11 @@
 import MainLayout from './layout/MainLayout';
+import  Home  from './screens/Home';
 
 function App() {
   return (
-    <MainLayout>
-      <div></div>
-    </MainLayout>
+      <MainLayout>
+        <Home/>
+      </MainLayout>
   );
 }
 
