@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { IoMdMenu } from 'react-icons/io';
-import DateDisplay from './DateDisplay';
+
 import { navByRole, type Role } from '@/constant/nav';
 
 type NavLinksProps = {
@@ -28,9 +28,6 @@ const MobileNav = ({ role }: NavLinksProps) => {
                 {link.label}
               </a>
             ))}
-            <div className="mt-4 text-muted-foreground text-sm">
-              <DateDisplay />
-            </div>
           </div>
         </SheetContent>
       </Sheet>

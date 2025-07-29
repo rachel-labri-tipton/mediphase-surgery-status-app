@@ -10,7 +10,6 @@ const HeaderMenu = ({ role }: { role: Role }) => {
       <div className="hidden sm:flex items-center gap-6 mr-6">
         <NavLinks role={role} />
         <DateDisplay />
-        
       </div>
 
       <MobileNav role={role} />
