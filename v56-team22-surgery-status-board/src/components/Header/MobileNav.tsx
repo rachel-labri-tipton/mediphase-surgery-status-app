@@ -13,11 +13,11 @@ const MobileNav = ({ role }: NavLinksProps) => {
     <div className="sm:hidden">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="text-primary">
-            <IoMdMenu className="h-6 w-6" />
+          <Button variant="secondary" size="icon" className="text-primary">
+            <IoMdMenu className="h-8 w-8" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left">
+        <SheetContent side="right" className="w-[300px] sm:w-64">
           <div className="p-4 space-y-4">
             {links.map((link) => (
               <a
