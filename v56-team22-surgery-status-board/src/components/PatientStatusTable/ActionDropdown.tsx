@@ -10,8 +10,8 @@ import {
 } from "../ui/dropdown-menu";
 
 type ActionDropdownProps = {
-  onUpdateInfo: () => void;
-  onUpdateStatus: () => void;
+  onUpdateInfo?: () => void;
+  onUpdateStatus?: () => void;
   onViewDetails?: () => void;
 };
 
@@ -35,9 +35,9 @@ const ActionDropdown = ({
             View Patient Details
           </DropdownMenuItem>
         )}
-        <DropdownMenuItem onClick={onUpdateInfo} className="cursor-pointer">
+        {onUpdateInfo && (<DropdownMenuItem onClick={onUpdateInfo} className="cursor-pointer">
           Update Info
-        </DropdownMenuItem>
+        </DropdownMenuItem>)}
         <DropdownMenuItem onClick={onUpdateStatus} className="cursor-pointer">
           Update Status
         </DropdownMenuItem>
