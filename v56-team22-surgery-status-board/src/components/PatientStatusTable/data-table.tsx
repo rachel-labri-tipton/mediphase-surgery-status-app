@@ -19,24 +19,19 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Input } from "../ui/input"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "../ui/button"
 import ColumnVisibilityDropdown from "./ColumnVisibilityDropdown"
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  role: string // Assuming role is a string, adjust as necessary
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  role,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -60,15 +55,20 @@ export function DataTable<TData, TValue>({
     <div className="flex items-center justify-center">
     <div className="w-4/5 md:w-2/3 mx-auto rounded-md border px-2 md:px-6">
     <div className="flex items-center py-4">
-      <Input
-        placeholder="Search Patient ID..."
-        value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
-        onChange={(event) =>
-          table.getColumn("id")?.setFilterValue(event.target.value)
-        }
-        className="max-w-sm"
-          />
-         <ColumnVisibilityDropdown table={table} />
+          {(role === "admin" || role === "surgical team") && (
+            <>
+            <Input
+            placeholder="Search Patient ID..."
+            value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("id")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+              />
+              {/* commenting out for the moment since not part of core features */}
+              {/* <ColumnVisibilityDropdown table={table} /> */}
+            </>
+          )}
           </div>
       <Table className="my-8">
         <TableHeader>
