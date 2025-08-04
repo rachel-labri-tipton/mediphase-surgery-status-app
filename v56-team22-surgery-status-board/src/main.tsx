@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     Component: SignIn,
   },
   {
-    path: '/patient-status-board',
+    path: '/patient-status',
     Component: PatientStatusBoard,
   },
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     Component: PatientInformation,
   },
   {
-    path: '/patient-status-update',
+    path: '/update-patient',
     Component: PatientStatusUpdate,
   },
 ]);
