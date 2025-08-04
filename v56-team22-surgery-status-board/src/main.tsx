@@ -5,6 +5,8 @@ import App from './App.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router';
 import SignIn from './screens/SignIn.tsx';
 import PatientStatusBoard from './screens/PatientStatusBoard.tsx';
+import PatientInformation from './screens/PatientInformation.tsx';
+import PatientStatusUpdate from './screens/PatientStatusUpdate.tsx';
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,15 @@ const router = createBrowserRouter([
   {
     path: '/patient-status-board',
     Component: PatientStatusBoard,
-  }
-
+  },
+  {
+    path: '/patient-information',
+    Component: PatientInformation,
+  },
+  {
+    path: '/patient-status-update',
+    Component: PatientStatusUpdate,
+  },
 ]);
 
 createRoot(document.getElementById('root')!).render(
