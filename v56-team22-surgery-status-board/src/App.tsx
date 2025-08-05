@@ -1,9 +1,9 @@
 import MainLayout from './layout/MainLayout';
-import SignIn from './components/SignIn';
+import Home from './screens/Home';
 
 const App = () => (
   <MainLayout>
-    <SignIn />
+    <Home />
   </MainLayout>
 );
 

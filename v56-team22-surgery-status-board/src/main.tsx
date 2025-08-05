@@ -3,11 +3,26 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router';
+import PatientStatusBoard from './screens/PatientStatusBoard.tsx';
+import PatientInformation from './screens/PatientInformation.tsx';
+import PatientStatusUpdate from './screens/PatientStatusUpdate.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     Component: App,
+  },
+  {
+    path: '/patient-status',
+    Component: PatientStatusBoard,
+  },
+  {
+    path: '/patient-information',
+    Component: PatientInformation,
+  },
+  {
+    path: '/update-patient',
+    Component: PatientStatusUpdate,
   },
 ]);
 
