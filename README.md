@@ -37,3 +37,4 @@ coding!
 - Rachel Tipton: [GitHub](https://github.com/rachel-labri-tipton) / [LinkedIn](https://www.linkedin.com/in/rachel-labri-tipton/)
 - Mohamed Ouederni: [GitHub](https://github.com/9-barristanselmy-9) / [LinkedIn](https://www.linkedin.com/in/mohamed-ouederni-0bb11ab4/)
 - Avtar Singh: [GitHub](https://github.com/ManpreetSL) / [LinkedIn](https://www.linkedin.com/in/avtar-singh-uk/)
+- Rapha Chris: [Github](https://github.com/Excalibur097) / [LinkedIn](https://www.linkedin.com/in/sugari-rapha-8823a58a)
