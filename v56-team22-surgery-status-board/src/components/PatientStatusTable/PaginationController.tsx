@@ -1,11 +1,6 @@
 import  { useState } from 'react';
 import { type Table as ReactTable } from '@tanstack/react-table';
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
@@ -16,11 +11,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Button } from '../ui/button';
-import { getPageNumbers } from '@/lib/paginationUtils';
+import { Button } from '@/components/ui/button';
 
-type PaginationMode = 'manual' | 'auto' | 'paused';
+import {
+  FaAngleDoubleLeft,
+  FaAngleDoubleRight,
+  FaAngleLeft,
+  FaAngleRight,
+} from 'react-icons/fa';
 
+// type PaginationMode = 'manual' | 'auto' | 'paused';
 interface PaginationControllerProps<TData> {
   table: ReactTable<TData>;
 }
@@ -28,8 +28,6 @@ interface PaginationControllerProps<TData> {
 function PaginationController<TData>({
   table,
 }: PaginationControllerProps<TData>) {
-  const [paginationMode, setPaginationMode] =
-    useState<PaginationMode>('manual');
   const [pageSize, setPageSize] = useState(
     table.getState().pagination.pageSize
   );
@@ -40,142 +38,95 @@ function PaginationController<TData>({
   const startIndex = currentPage * pageSize + 1;
   const endIndex = Math.min((currentPage + 1) * pageSize, totalItems);
 
-  //TODO: Implement auto-pagination logic
-
-  const toggleMode = () => {
-    setPaginationMode((prev) =>
-      prev === 'manual' ? 'auto' : prev === 'auto' ? 'paused' : 'manual'
-    );
-  };
   const handlePageSizeChange = (value: string) => {
     const size = parseInt(value);
     setPageSize(size);
     table.setPageSize(size);
   };
-  const isPreviousDisabled = currentPage === 0 || paginationMode === 'auto';
-  const isNextDisabled =
-    currentPage === totalPages - 1 || paginationMode === 'auto';
+
+  //TODO: Implement auto pagination mode
+
+  // Helper to determine disabled state for Previous/Next
+  const isPreviousDisabled = currentPage === 0;
+  const isNextDisabled = currentPage === totalPages - 1;
 
   return (
-    <div className="flex flex-col items-center gap-4 py-4 transition-all duration-200">
+    <div className="flex flex-col items-center gap-4 py-4">
+      <div className="text-sm text-gray-600">
+        {totalItems > 0
+          ? `${startIndex}-${endIndex} of ${totalItems} row(s) selected`
+          : '0 of 0 row(s) selected'}
+      </div>
       <div className="flex items-center gap-4">
-        <Button
-          onClick={toggleMode}
-          size="sm"
-          variant="outline"
-          aria-label={`Switch to ${paginationMode === 'manual' ? 'auto' : paginationMode === 'auto' ? 'paused' : 'manual'} mode`}
-        >
-          Mode: {paginationMode.toUpperCase()}
-        </Button>
-        {paginationMode === 'auto' && (
-          <span className="text-xs text-gray-500 animate-pulse">
-            Auto cycling every 20s
-          </span>
-        )}
-        {paginationMode === 'paused' && (
-          <span className="text-xs text-yellow-600">Paused</span>
-        )}
         <Select
           value={pageSize.toString()}
           onValueChange={handlePageSizeChange}
         >
-          <SelectTrigger className="w-32">
-            <SelectValue placeholder="Items per page" />
+          <SelectTrigger className="w-24">
+            <SelectValue placeholder="Rows per page" />
           </SelectTrigger>
           <SelectContent>
             {[5, 10, 20, 50].map((size) => (
               <SelectItem key={size} value={size.toString()}>
-                {size} per page
+                {size}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
+        <span className="text-sm">
+          Page {currentPage + 1} of {totalPages}
+        </span>
+        <div className="flex items-center gap-1">
+          <Button
+            onClick={() => table.setPageIndex(0)}
+            size="sm"
+            variant="outline"
+            disabled={currentPage === 0}
+            className="transition-colors duration-200"
+            aria-label="Go to first page"
+          >
+            <FaAngleDoubleLeft />
+          </Button>
+          <div
+            className={
+              isPreviousDisabled
+                ? 'pointer-events-none opacity-50'
+                : 'cursor-pointer'
+            }
+            onClick={() => !isPreviousDisabled && table.previousPage()}
+            aria-disabled={isPreviousDisabled}
+            aria-label="Go to previous page"
+          >
+            <PaginationPrevious>
+              <FaAngleLeft />
+            </PaginationPrevious>
+          </div>
+          <div
+            className={
+              isNextDisabled
+                ? 'pointer-events-none opacity-50'
+                : 'cursor-pointer'
+            }
+            onClick={() => !isNextDisabled && table.nextPage()}
+            aria-disabled={isNextDisabled}
+            aria-label="Go to next page"
+          >
+            <PaginationNext>
+              <FaAngleRight />
+            </PaginationNext>
+          </div>
+          <Button
+            onClick={() => table.setPageIndex(totalPages - 1)}
+            size="sm"
+            variant="outline"
+            disabled={currentPage === totalPages - 1}
+            className="transition-colors duration-200"
+            aria-label="Go to last page"
+          >
+            <FaAngleDoubleRight />
+          </Button>
+        </div>
       </div>
-
-      <div className="text-sm text-gray-600">
-        Showing {startIndex}-{endIndex} of {totalItems} items
-      </div>
-
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <Button
-              onClick={() => table.setPageIndex(0)}
-              disabled={currentPage === 0 || paginationMode === 'auto'}
-              size="sm"
-              variant="outline"
-              aria-label="Go to first page"
-            >
-              First
-            </Button>
-          </PaginationItem>
-          <PaginationItem>
-            <div
-              className={
-                isPreviousDisabled
-                  ? 'pointer-events-none opacity-50'
-                  : 'cursor-pointer'
-              }
-              onClick={() => !isPreviousDisabled && table.previousPage()}
-              aria-disabled={isPreviousDisabled}
-              aria-label="Go to previous page"
-            >
-              <PaginationPrevious />
-            </div>
-          </PaginationItem>
-
-          {getPageNumbers(currentPage, totalPages).map((page, i) => (
-            <PaginationItem key={i}>
-              {typeof page === 'string' ? (
-                <PaginationEllipsis />
-              ) : (
-                <PaginationLink
-                  onClick={() => table.setPageIndex(page)}
-                  isActive={page === currentPage}
-                  aria-disabled={paginationMode === 'auto'}
-                  className={
-                    paginationMode === 'auto'
-                      ? 'pointer-events-none opacity-50'
-                      : 'hover:bg-muted/80 transition-colors duration-200'
-                  }
-                  aria-label={`Go to page ${page + 1}`}
-                >
-                  {page + 1}
-                </PaginationLink>
-              )}
-            </PaginationItem>
-          ))}
-
-          <PaginationItem>
-            <div
-              className={
-                isNextDisabled
-                  ? 'pointer-events-none opacity-50'
-                  : 'cursor-pointer'
-              }
-              onClick={() => !isNextDisabled && table.nextPage()}
-              aria-disabled={isNextDisabled}
-              aria-label="Go to next page"
-            >
-              <PaginationNext />
-            </div>
-          </PaginationItem>
-          <PaginationItem>
-            <Button
-              onClick={() => table.setPageIndex(totalPages - 1)}
-              size="sm"
-              variant="outline"
-              disabled={
-                currentPage === totalPages - 1 || paginationMode === 'auto'
-              }
-              className="transition-colors duration-200"
-              aria-label="Go to last page"
-            >
-              Last
-            </Button>
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
     </div>
   );
 }
