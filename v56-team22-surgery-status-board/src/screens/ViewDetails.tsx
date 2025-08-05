@@ -22,7 +22,7 @@ interface Patient  {
 const ViewDetails = () => {
   const {id} = useParams()
   const patient = patientData.find((p) => p.id === id);
-  const [firstName ='', lastName=''] = patient?.name.split(" ")
+  const [firstName = '', lastName = ''] = patient!.name.split(' ')
   console.log(firstName)
 
   const patientFields =[
@@ -40,7 +40,6 @@ const ViewDetails = () => {
   
 
   return (
-    <MainLayout>
       <div className='px-[30px] md:px-[100px] mt-[50px] flex flex-col justify-center items-center'>
         <h1 className='text-3xl font-bold text-center'>Patient Details</h1>
         <div className='mt-[40px] mb-[50px]'>
@@ -68,7 +67,6 @@ const ViewDetails = () => {
           </Link>
       </div>
       </div>
-    </MainLayout>
 
   )
 }

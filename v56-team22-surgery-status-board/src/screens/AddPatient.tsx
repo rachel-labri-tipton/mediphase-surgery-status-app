@@ -86,8 +86,11 @@ const AddPatient = () => {
 
       toast.success('Patient added successfully', {
         description: 'The new patient has been added to the system',
+        duration:2000
       });
-      navigate('/patient-status-board');
+      setTimeout(() => {
+       navigate('/patient-status-board'); 
+      }, 2000);
     } catch (error) {
       toast.error('Failed to add patient', {
         description: 'There was an error adding the new patient',
@@ -103,7 +106,6 @@ const AddPatient = () => {
   };
 
   return (
-    <MainLayout>
       <div className='px-[30px] md:px-[40px] mt-[50px] flex flex-col justify-center items-center'>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full px-[30px] md:px-[70px] lg:px-0 lg:w-[700px]">
@@ -220,10 +222,9 @@ const AddPatient = () => {
               </Button>
             </div>
           </form>
-          <Toaster />
+          <Toaster position='top-center'/>
         </Form>
       </div>
-    </MainLayout>
   );
 };
 

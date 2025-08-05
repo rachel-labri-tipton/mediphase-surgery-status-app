@@ -95,9 +95,13 @@ const UpdateInfo = () => {
       // Update the patient data in the array
       patientData[patientIndex] = updatedPatient;
       toast.success('Patient data updated successfully',{
-        description:'Your changes have been saved'
+        description:'Your changes have been saved',
+        duration:2000
       })
-      navigate(`/patient-status-board`);
+      setTimeout(() => {
+        navigate(`/patient-status-board`);
+      },2000);
+      
     } catch (error) {
         toast.error('Failed to upate patient data',{
         description:'Your changes have not been saved'
@@ -117,7 +121,6 @@ const UpdateInfo = () => {
   }
 
   return (
-    <MainLayout>
     <div className='px-[30px] md:px-[40px] mt-[50px] flex flex-col justify-center items-center'>
       <h1 className='text-3xl font-bold text-center mb-[50px]'>Update Patient Details</h1>
       <Form {...form}>
@@ -237,10 +240,9 @@ const UpdateInfo = () => {
             </Button>
           </div>
         </form>
-        <Toaster />
+        <Toaster position='top-center' />
       </Form>
     </div>
-    </MainLayout>
   );
 }
 
