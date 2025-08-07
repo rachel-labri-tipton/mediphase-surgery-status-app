@@ -19,7 +19,10 @@ const devNames = [
     github: 'https://github.com/rachel-labri-tipton',
     linkedin: 'https://www.linkedin.com/in/rachel-labri-tipton',
   },
-  { name: 'Rapha', github: 'https://github.com/Excalibur097', linkedin: '' },
+  { name: 'Rapha',
+    github: 'https://github.com/Excalibur097',
+    linkedin: 'https://www.linkedin.com/in/sugari-rapha-8823a58a'
+  },
 ];
 
 const pages = [
@@ -29,13 +32,21 @@ const pages = [
 
 const Footer = () => {
   return (
-    <footer className="w-full px-6 py-8 bg-[#16a34a] flex flex-col justify-between items-center text-gray-800">
+    <footer className="w-full px-4 py-8 bg-primary text-gray-800">
       <div className="flex flex-col md:flex-row justify-between items-start w-full max-w-6xl mx-auto gap-8">
-        <FooterLogo />
-        <DeveloperItems devs={devNames} />
-        <PageList pages={pages} />
+        <div className="w-full md:w-1/3 flex justify-center md:justify-start">
+          <FooterLogo />
+        </div>
+        <div className="w-full md:w-1/3 flex justify-center">
+          <DeveloperItems devs={devNames} />
+        </div>
+        <div className="w-full md:w-1/3 flex justify-center md:justify-end">
+          <PageList pages={pages} />
+        </div>
       </div>
-      <GithubProjectLink />
+      <div className="mt-6 w-full flex justify-center">
+        <GithubProjectLink />
+      </div>
     </footer>
   );
 };
