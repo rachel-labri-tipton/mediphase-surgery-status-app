@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router';
 
 const SignIn = () => {
   const [error, setError] = useState<string>('');
-  const { user, signIn } = useAuth();
+  const { user, signIn, signInAsGuest } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,7 +87,11 @@ const SignIn = () => {
             <Button type="submit" className="w-full">
               Sign in
             </Button>
-            <Button variant="outline" className="w-full">
+            <Button
+              onClick={signInAsGuest}
+              variant="outline"
+              className="w-full"
+            >
               Sign in as a guest
             </Button>
           </CardFooter>

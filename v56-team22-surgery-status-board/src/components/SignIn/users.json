@@ -10,10 +10,5 @@
     "email": "surgeon@mediphase.com",
     "password": "surgeon",
     "role": "surgical"
-  },
-  {
-    "id": "1234",
-    "email": "guest@mediphase.com",
-    "role": "guest"
   }
 ]

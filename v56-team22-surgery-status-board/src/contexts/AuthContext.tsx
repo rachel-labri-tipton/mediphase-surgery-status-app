@@ -1,10 +1,13 @@
 import { createContext, useState } from 'react';
 import users from '../components/SignIn/users.json';
 import { AuthError } from '@/lib/authUtils';
+import type { Role } from '@/constant/nav';
+import { v4 as uuidv4 } from 'uuid';
 
 type User = {
   id: string;
-  email: string;
+  email?: string;
+  role: Role;
 } | null;
 
 export const INVALID_EMAIL_MSG =
@@ -15,6 +18,7 @@ export const INVALID_PASSWORD_MSG =
 export type AuthContextType = {
   user: User;
   signIn: (email: string, password: string) => Promise<User>;
+  signInAsGuest: () => void;
   signOut: () => void;
 };
 
@@ -33,15 +37,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return Promise.reject(new AuthError(INVALID_PASSWORD_MSG));
     }
 
-    const { password: _, ...userProps } = storedUser;
+    const { password: _, ...userProps } = storedUser as User & {
+      password: string;
+    };
     setUser(userProps);
     return Promise.resolve(userProps);
   };
 
+  const signInAsGuest = () =>
+    setUser({
+      id: uuidv4(),
+      role: 'guest',
+    });
+
   const signOut = () => setUser(null);
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signInAsGuest, signOut }}>
       {children}
     </AuthContext.Provider>
   );
