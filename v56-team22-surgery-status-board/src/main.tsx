@@ -1,12 +1,13 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
-import App from './App.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router';
-import SignIn from './screens/SignIn.tsx';
+import { AuthProvider } from './contexts/AuthContext';
+import App from './App.tsx';
+import SignIn from './components/SignIn/index.tsx';
 import PatientStatusBoard from './screens/PatientStatusBoard.tsx';
 import PatientInformation from './screens/PatientInformation.tsx';
 import PatientStatusUpdate from './screens/PatientStatusUpdate.tsx';
+import './index.css';
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     Component: App,
   },
   {
-    path: '/sign-in',
+    path: 'sign-in',
     Component: SignIn,
   },
   {
@@ -33,6 +34,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
