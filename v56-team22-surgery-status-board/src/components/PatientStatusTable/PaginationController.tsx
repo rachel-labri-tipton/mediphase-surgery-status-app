@@ -1,9 +1,6 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { type Table as ReactTable } from '@tanstack/react-table';
-import {
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination';
+import { PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import {
   Select,
   SelectContent,
@@ -34,8 +31,8 @@ function PaginationController<TData>({
 
   const totalPages = table.getPageCount();
   const currentPage = table.getState().pagination.pageIndex;
-  const totalItems = table.getRowModel().rows.length;
-  const startIndex = currentPage * pageSize + 1;
+  const totalItems = table.getFilteredRowModel().rows.length;
+  const startIndex = totalItems > 0 ? currentPage * pageSize + 1 : 0;
   const endIndex = Math.min((currentPage + 1) * pageSize, totalItems);
 
   const handlePageSizeChange = (value: string) => {
@@ -51,11 +48,11 @@ function PaginationController<TData>({
   const isNextDisabled = currentPage === totalPages - 1;
 
   return (
-    <div className="flex flex-col items-center gap-4 py-4">
+    <div className="flex justify-between items-center gap-4 py-4">
       <div className="text-sm text-gray-600">
         {totalItems > 0
-          ? `${startIndex}-${endIndex} of ${totalItems} row(s) selected`
-          : '0 of 0 row(s) selected'}
+          ? `${startIndex}-${endIndex} of ${totalItems} row(s)`
+          : '0 of 0 row(s)'}
       </div>
       <div className="flex items-center gap-4">
         <Select
@@ -66,7 +63,7 @@ function PaginationController<TData>({
             <SelectValue placeholder="Rows per page" />
           </SelectTrigger>
           <SelectContent>
-            {[5, 10, 20, 50].map((size) => (
+            {[5, 10].map((size) => (
               <SelectItem key={size} value={size.toString()}>
                 {size}
               </SelectItem>
