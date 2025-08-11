@@ -34,8 +34,8 @@ function PaginationController<TData>({
 
   const totalPages = table.getPageCount();
   const currentPage = table.getState().pagination.pageIndex;
-  const totalItems = table.getRowModel().rows.length;
-  const startIndex = currentPage * pageSize + 1;
+  const totalItems = table.getFilteredRowModel().rows.length;
+  const startIndex = totalItems > 0 ? currentPage * pageSize + 1:0;
   const endIndex = Math.min((currentPage + 1) * pageSize, totalItems);
 
   const handlePageSizeChange = (value: string) => {
@@ -46,6 +46,7 @@ function PaginationController<TData>({
 
   //TODO: Implement auto pagination mode
 
+
   // Helper to determine disabled state for Previous/Next
   const isPreviousDisabled = currentPage === 0;
   const isNextDisabled = currentPage === totalPages - 1;
@@ -54,8 +55,8 @@ function PaginationController<TData>({
     <div className="flex flex-col items-center gap-4 py-4">
       <div className="text-sm text-gray-600">
         {totalItems > 0
-          ? `${startIndex}-${endIndex} of ${totalItems} row(s) selected`
-          : '0 of 0 row(s) selected'}
+          ? `${startIndex}-${endIndex} of ${totalItems} row(s)`
+          : '0 of 0 row(s)'}
       </div>
       <div className="flex items-center gap-4">
         <Select
