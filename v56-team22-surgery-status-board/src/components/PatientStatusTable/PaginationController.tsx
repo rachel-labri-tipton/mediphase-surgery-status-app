@@ -48,7 +48,7 @@ function PaginationController<TData>({
   const isNextDisabled = currentPage === totalPages - 1;
 
   return (
-    <div className="flex flex-col items-center gap-4 py-4">
+    <div className="flex justify-between items-center gap-4 py-4">
       <div className="text-sm text-gray-600">
         {totalItems > 0
           ? `${startIndex}-${endIndex} of ${totalItems} row(s)`
