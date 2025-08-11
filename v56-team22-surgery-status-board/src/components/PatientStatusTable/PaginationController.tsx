@@ -1,9 +1,6 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { type Table as ReactTable } from '@tanstack/react-table';
-import {
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination';
+import { PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import {
   Select,
   SelectContent,
@@ -35,7 +32,7 @@ function PaginationController<TData>({
   const totalPages = table.getPageCount();
   const currentPage = table.getState().pagination.pageIndex;
   const totalItems = table.getFilteredRowModel().rows.length;
-  const startIndex = totalItems > 0 ? currentPage * pageSize + 1:0;
+  const startIndex = totalItems > 0 ? currentPage * pageSize + 1 : 0;
   const endIndex = Math.min((currentPage + 1) * pageSize, totalItems);
 
   const handlePageSizeChange = (value: string) => {
@@ -45,7 +42,6 @@ function PaginationController<TData>({
   };
 
   //TODO: Implement auto pagination mode
-
 
   // Helper to determine disabled state for Previous/Next
   const isPreviousDisabled = currentPage === 0;
@@ -67,7 +63,7 @@ function PaginationController<TData>({
             <SelectValue placeholder="Rows per page" />
           </SelectTrigger>
           <SelectContent>
-            {[5, 10, 20, 50].map((size) => (
+            {[5, 10].map((size) => (
               <SelectItem key={size} value={size.toString()}>
                 {size}
               </SelectItem>
