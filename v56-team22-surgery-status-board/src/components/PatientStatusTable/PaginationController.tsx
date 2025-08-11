@@ -34,6 +34,8 @@ function PaginationController<TData>({
   const [paginationMode, setPaginationMode] =
     useState<PaginationMode>('manual');
 
+  const [countdown, setCountdown] = useState(20);
+
   const totalPages = table.getPageCount();
   const currentPage = table.getState().pagination.pageIndex;
   const totalItems = table.getFilteredRowModel().rows.length;
@@ -48,19 +50,29 @@ function PaginationController<TData>({
 
   // auto pagination every 15 seconds
   useEffect(() => {
+    if (paginationMode !== 'auto') {
+      setCountdown(20);
+      return;
+    }
+    setCountdown(20);
     if (paginationMode !== 'auto') return;
-
     const interval = setInterval(() => {
-      const currentPageIndex = table.getState().pagination.pageIndex;
-      const pageCount = table.getPageCount();
-      if (pageCount > 0) {
-        if (currentPageIndex < pageCount - 1) {
-          table.nextPage();
-        } else {
-          table.setPageIndex(0);
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          const currentPageIndex = table.getState().pagination.pageIndex;
+          const pageCount = table.getPageCount();
+          if (pageCount > 0) {
+            if (currentPageIndex < pageCount - 1) {
+              table.nextPage();
+            } else {
+              table.setPageIndex(0);
+            }
+          }
+          return 20;
         }
-      }
-    }, 15000);
+        return prev - 1;
+      });
+    }, 1000);
     return () => clearInterval(interval);
   }, [paginationMode, table]);
 
@@ -165,6 +177,11 @@ function PaginationController<TData>({
           {paginationMode === 'auto' && <FaPause className="text-yellow-600" />}
           {paginationMode === 'paused' && <FaStop className="text-red-600" />}
         </Button>
+        {paginationMode === 'auto' && (
+          <span className="text-xs text-gray-500">
+            Next page in {countdown}s
+          </span>
+        )}
       </div>
     </div>
   );
