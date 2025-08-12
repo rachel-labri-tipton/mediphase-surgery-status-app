@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1212",
+    "email": "admin@mediphase.com",
+    "password": "admin",
+    "role": "admin"
+  },
+  {
+    "id": "1313",
+    "email": "surgeon@mediphase.com",
+    "password": "surgeon",
+    "role": "surgical"
+  }
+]
