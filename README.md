@@ -37,7 +37,6 @@ As part of Chingu Voyage 56, our team is building MediPhase.
 - [ ] Patient Information Screen
 - [ ] Patient Status Update Screen
 - [ ] Patient Status Display Screen 
-- [ ] Validation and Error Handling
 
 
 ## Folder Structure 
@@ -50,12 +49,10 @@ The app uses the following folder structure:
 `/src/hooks` - React hooks that we make
 
 ## Storage
-* As a more frontend-focused app, we're using local storage for any data that needs to be persisted. 
-* If any cross-component data sharing is required, we can use React Context API for now. 
-
+* This project uses React's Context API to manage and store the current user role within the applicaiton during the user's session. 
+* As a more frontend-focused app, we're using Local Storage for any data that needs to be persisted across page refreshes. 
 
 ## Dependencies
-
 
 ## Running Mediphase 
 
@@ -83,3 +80,4 @@ coding!
 - Rachel Tipton: [GitHub](https://github.com/rachel-labri-tipton) / [LinkedIn](https://www.linkedin.com/in/rachel-labri-tipton/)
 - Mohamed Ouederni: [GitHub](https://github.com/9-barristanselmy-9) / [LinkedIn](https://www.linkedin.com/in/mohamed-ouederni-0bb11ab4/)
 - Avtar Singh: [GitHub](https://github.com/ManpreetSL) / [LinkedIn](https://www.linkedin.com/in/avtar-singh-uk/)
+- Rapha Chris: [Github](https://github.com/Excalibur097) / [LinkedIn](https://www.linkedin.com/in/sugari-rapha-8823a58a)
