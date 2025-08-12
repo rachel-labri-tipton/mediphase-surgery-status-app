@@ -1,6 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router'
-import { Button } from "@/components/ui/button";
+import { Link } from 'react-router';
+import { Button } from '@/components/ui/button';
 
 const Home = () => {
   return (
@@ -38,6 +37,6 @@ const Home = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Home
+export default Home;
