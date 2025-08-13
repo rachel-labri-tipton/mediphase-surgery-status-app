@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getColumns } from "./columns";
 import { DataTable } from "./data-table";
-import { patientData } from "./data/patient-data";
+import { patientData } from "./data/patient-data-updated";
 import type { TableRole } from "@/constant/patient-table";
 
 const PatientStatusTable = () => {
