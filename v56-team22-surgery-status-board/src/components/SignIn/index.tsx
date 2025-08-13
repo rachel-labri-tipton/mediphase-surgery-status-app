@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import {
   INVALID_EMAIL_MSG,
   INVALID_PASSWORD_MSG,
-} from '@/contexts/AuthContext';
+} from '@/contexts/auth-context-types';
 import useAuth from '@/hooks/useAuth';
 import { AuthError } from '@/lib/authUtils';
 import { useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ const SignIn = () => {
     }
 
     navigate('/patient-status');
-  }, [user]);
+  }, [user,navigate]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
