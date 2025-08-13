@@ -11,7 +11,7 @@ const PatientStatusUpdate = () => {
     <div className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-4xl font-bold mb-4">Update Patient Status</h1>
       {!foundPatient ? (
-        <FindPatientForm onFound={setFoundPatient} />
+          <FindPatientForm onFound={setFoundPatient} />
       ) : (
           <>
           <PatientStatusForm foundPatient={foundPatient} onStatusUpdated={setFoundPatient} />
@@ -19,9 +19,9 @@ const PatientStatusUpdate = () => {
           <Button
           type="button"
           variant="secondary"
-          className="ml-2 mt-10"
+          className="ml-2 mt-10 cursor-pointer hover:scale-105 transition-transform"
           onClick={() => setFoundPatient(null)}>
-          Clear and Find New Patient
+         View Another Patient
         </Button>
         </>
       )}
