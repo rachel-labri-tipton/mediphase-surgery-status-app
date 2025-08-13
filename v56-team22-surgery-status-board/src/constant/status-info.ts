@@ -3,6 +3,7 @@ export type StatusData = {status: string;
   color: string;
 };
 
+
 export const statusLabels = [
   'Checked In',
   'Pre-Procedure',
