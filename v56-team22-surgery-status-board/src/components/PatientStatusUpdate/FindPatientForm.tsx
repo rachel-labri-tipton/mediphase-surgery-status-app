@@ -1,7 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from '@/components/ui/form';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { getPatientById, initPatientsIfNeeded } from '@/utility/patientHelpers';
@@ -39,6 +46,14 @@ export function FindPatientForm({ onFound }: { onFound: (patient: Patient | null
   }
 
   return (
+    <Card className="m-2 p-6 w-full max-w-md border-gray-500">
+      <CardHeader>
+        <CardTitle className="text-2xl">Find Patient</CardTitle>
+        <CardDescription>
+          Enter the Patient ID to find the patient and update their status.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleFindPatient)} className="space-y-4">
         <FormField
@@ -48,28 +63,33 @@ export function FindPatientForm({ onFound }: { onFound: (patient: Patient | null
             <FormItem>
               <FormLabel>Patient ID</FormLabel>
               <FormControl>
-                <Input placeholder="Enter patient ID" {...field} />
+                <Input placeholder="Enter patient ID..." {...field} />
               </FormControl>
-              <FormDescription>
-                Enter the unique Patient ID and click "Find Patient".
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
-        /> 
-        <Button type="submit">Find Patient</Button>
+            /> 
+           <div className="flex w-50 justify-between items-center mt-4">
+
+            <Button type="submit"
+              disabled={!form.watch("patientNumber")}
+              className="cursor-pointer hover:scale-105 transition-transform">Find Patient</Button>
         <Button
           type="button"
           variant="secondary"
-          className="ml-8"
+          disabled={!form.watch("patientNumber")}
+          className="ml-8 cursor-pointer hover:scale-105 transition-transform"
           onClick={() => {
             form.reset();
             setSearchError('');
           }}> Reset Form
-        </Button>
-        {searchError && <div className="mt-2 text-red-500">{searchError}</div>}
+              </Button>
+              </div>
+        {searchError && <div className="mt-4 text-red-500">{searchError}</div>}
       </form>
-    </Form>
+        </Form>
+      </CardContent>
+      </Card>
   );
 }
 
