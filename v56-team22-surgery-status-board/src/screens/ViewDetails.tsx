@@ -1,23 +1,9 @@
-import React from 'react'
 import { useParams } from 'react-router'
 import { patientData } from '@/components/PatientStatusTable/data/patient-data-updated'
-import MainLayout from '@/layout/MainLayout';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router'
 
-interface Patient  {
-  id: string;
-  name: string;
-  status: string;
-  color: string;
-  message: string;
-  streetAddress: string;
-  city: string;
-  stateProvinceRegion: string;
-  country: string;
-  telephoneNumber: string;
-  contactEmail: string;
-};
+
 
 const ViewDetails = () => {
   const {id} = useParams()
@@ -55,14 +41,14 @@ const ViewDetails = () => {
           }
         </div>
         <div className='flex flex-col gap-[30px] justify-center md:flex-row md:gap-[100px] mb-[100px]'>
+          <Link to={'/patient-status-board'}>
+            <Button  variant="default"className="w-[185px] h-[68px] rounded-xl bg-[#32AA2A] text-white">
+              Cancel
+            </Button>
+          </Link>
           <Link to={`/update-info/${id}`}>
             <Button  variant="default"className="w-[185px] h-[68px] rounded-xl bg-[#32AA2A] text-white">
               Update info
-            </Button>
-          </Link>
-          <Link to={'/add-patient'}>
-            <Button  variant="default"className="w-[185px] h-[68px] rounded-xl bg-[#32AA2A] text-white">
-              Add new patient
             </Button>
           </Link>
       </div>

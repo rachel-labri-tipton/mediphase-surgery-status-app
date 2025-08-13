@@ -14,7 +14,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast, Toaster } from 'sonner';
 
-const formSchema = z.object({
+export const formSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   streetAddress: z.string().min(1, 'Street address is required'),

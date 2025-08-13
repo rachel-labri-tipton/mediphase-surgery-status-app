@@ -78,7 +78,7 @@ const UpdateInfo = () => {
       onSubmit={onSubmit}
       onCancel={handleCancel}
       title="Update Patient Details"
-      submitButtonText="Update Patient"
+      submitButtonText="Save changes"
     />
   );
 };
