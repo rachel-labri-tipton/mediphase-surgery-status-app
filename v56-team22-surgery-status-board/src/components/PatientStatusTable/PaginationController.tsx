@@ -17,10 +17,9 @@ import {
   FaAngleRight,
   FaPause,
   FaPlay,
-  FaStop,
 } from 'react-icons/fa';
 
-type PaginationMode = 'manual' | 'auto' | 'paused';
+type PaginationMode = 'manual' | 'auto';
 interface PaginationControllerProps<TData> {
   table: ReactTable<TData>;
 }
@@ -80,11 +79,12 @@ function PaginationController<TData>({
   const isPreviousDisabled = currentPage === 0;
   const isNextDisabled = currentPage === totalPages - 1;
 
+  // controller between manual and auto pagination
+  const isControllerDisabled = paginationMode === 'auto';
+
   const togglePaginationMode = () => {
     if (paginationMode === 'manual') {
       setPaginationMode('auto');
-    } else if (paginationMode === 'auto') {
-      setPaginationMode('paused');
     } else {
       setPaginationMode('manual');
     }
@@ -101,6 +101,7 @@ function PaginationController<TData>({
         <Select
           value={pageSize.toString()}
           onValueChange={handlePageSizeChange}
+          disabled={isControllerDisabled}
         >
           <SelectTrigger className="w-24">
             <SelectValue placeholder="Rows per page" />
@@ -121,7 +122,7 @@ function PaginationController<TData>({
             onClick={() => table.setPageIndex(0)}
             size="sm"
             variant="outline"
-            disabled={currentPage === 0}
+            disabled={isControllerDisabled || currentPage === 0}
             className="transition-colors duration-200"
             aria-label="Go to first page"
           >
@@ -129,11 +130,15 @@ function PaginationController<TData>({
           </Button>
           <div
             className={
-              isPreviousDisabled
+              isControllerDisabled || isPreviousDisabled
                 ? 'pointer-events-none opacity-50'
                 : 'cursor-pointer'
             }
-            onClick={() => !isPreviousDisabled && table.previousPage()}
+            onClick={() =>
+              !isControllerDisabled &&
+              !isPreviousDisabled &&
+              table.previousPage()
+            }
             aria-disabled={isPreviousDisabled}
             aria-label="Go to previous page"
           >
@@ -143,11 +148,13 @@ function PaginationController<TData>({
           </div>
           <div
             className={
-              isNextDisabled
+              isControllerDisabled || isNextDisabled
                 ? 'pointer-events-none opacity-50'
                 : 'cursor-pointer'
             }
-            onClick={() => !isNextDisabled && table.nextPage()}
+            onClick={() =>
+              !isControllerDisabled && !isNextDisabled && table.nextPage()
+            }
             aria-disabled={isNextDisabled}
             aria-label="Go to next page"
           >
@@ -159,7 +166,7 @@ function PaginationController<TData>({
             onClick={() => table.setPageIndex(totalPages - 1)}
             size="sm"
             variant="outline"
-            disabled={currentPage === totalPages - 1}
+            disabled={isControllerDisabled || currentPage === totalPages - 1}
             className="transition-colors duration-200"
             aria-label="Go to last page"
           >
@@ -175,7 +182,6 @@ function PaginationController<TData>({
         >
           {paginationMode === 'manual' && <FaPlay className="text-green-600" />}
           {paginationMode === 'auto' && <FaPause className="text-yellow-600" />}
-          {paginationMode === 'paused' && <FaStop className="text-red-600" />}
         </Button>
         {paginationMode === 'auto' && (
           <span className="text-xs text-gray-500">
