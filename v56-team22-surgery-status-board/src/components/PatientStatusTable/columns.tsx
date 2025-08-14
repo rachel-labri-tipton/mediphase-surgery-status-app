@@ -42,8 +42,9 @@ export function getColumns(role: TableRole): ColumnDef<Patient>[] {
     columns.push({
       accessorKey: "action",
       header: "",
-      cell: () => (
+      cell: ({row}) => (
         <ActionDropdown
+          patientId={row.original.id}
           onUpdateInfo={featuresByRole.includes("updateInfo") ? () => {/* ... */} : undefined}
           onUpdateStatus={featuresByRole.includes("updateStatus") ? () => {/* ... */} : undefined}
           onViewDetails={featuresByRole.includes("viewPatientDetails") ? () => {/* ... */} : undefined}
