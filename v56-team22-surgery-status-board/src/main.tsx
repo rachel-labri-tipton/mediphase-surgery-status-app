@@ -1,10 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Analytics } from '@vercel/analytics/react';
-import { RouterProvider, createBrowserRouter } from 'react-router';
 import { AuthProvider } from './contexts/AuthContext';
 import routes from './routes.ts';
 import './index.css';
+import { RouterProvider, createBrowserRouter } from 'react-router';
+import { Analytics } from '@vercel/analytics/react';
 
 const router = createBrowserRouter(routes);
 
