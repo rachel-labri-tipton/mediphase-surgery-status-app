@@ -13,23 +13,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { toast, Toaster } from 'sonner';
-
-export const formSchema = z.object({
-  firstName: z.string().min(1, 'First name is required'),
-  lastName: z.string().min(1, 'Last name is required'),
-  streetAddress: z.string().min(1, 'Street address is required'),
-  city: z.string().min(1, 'City is required'),
-  stateProvinceRegion: z.string().min(1, 'State/Province/Region is required'),
-  country: z.string().min(1, 'Country is required'),
-  telephoneNumber: z
-    .string()
-    .min(1, 'Telephone number is required')
-    .regex(
-      /^\+\d{1,3}-\d{1,4}-\d{3,4}-\d{4}$/,
-      'Invalid phone number format (e.g., +1-123-456-7890)',
-    ),
-  contactEmail: z.string().email('Invalid email address'),
-});
+import { formSchema } from '@/schemas/formSchemas/patient-formSchema';
 
 interface PatientFormProps {
   defaultValues?: z.infer<typeof formSchema>;
@@ -66,7 +50,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
     setIsSubmitting(true);
     try {
       await onSubmit(values);
-    } catch (error) {
+    } catch {
       toast.error(`Failed to ${submitButtonText.toLowerCase()} patient`, {
         description: `There was an error ${submitButtonText.toLowerCase()} the patient`,
       });
@@ -77,7 +61,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
 
   return (
     <div className="px-[30px] md:px-[40px] mt-[50px] flex flex-col justify-center items-center">
-      {title && <h1 className="text-3xl font-bold text-center mb-[50px]">{title}</h1>}
+      {title && (
+        <h1 className="text-3xl font-bold text-center mb-[50px]">{title}</h1>
+      )}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
@@ -88,7 +74,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
             name="firstName"
             render={({ field }) => (
               <FormItem className="flex flex-col md:flex-row md:justify-between">
-                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">First Name</FormLabel>
+                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">
+                  First Name
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter first name" {...field} />
                 </FormControl>
@@ -101,7 +89,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
             name="lastName"
             render={({ field }) => (
               <FormItem className="flex flex-col md:flex-row md:justify-between">
-                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">Last Name</FormLabel>
+                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">
+                  Last Name
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter last name" {...field} />
                 </FormControl>
@@ -114,7 +104,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
             name="streetAddress"
             render={({ field }) => (
               <FormItem className="flex flex-col md:flex-row md:justify-between">
-                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">Street Address</FormLabel>
+                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">
+                  Street Address
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter street address" {...field} />
                 </FormControl>
@@ -127,7 +119,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
             name="city"
             render={({ field }) => (
               <FormItem className="flex flex-col md:flex-row md:justify-between">
-                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">City</FormLabel>
+                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">
+                  City
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter city" {...field} />
                 </FormControl>
@@ -140,7 +134,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
             name="stateProvinceRegion"
             render={({ field }) => (
               <FormItem className="flex flex-col md:flex-row md:justify-between">
-                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">State/Province/Region</FormLabel>
+                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">
+                  State/Province/Region
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter state/province/region" {...field} />
                 </FormControl>
@@ -153,7 +149,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
             name="country"
             render={({ field }) => (
               <FormItem className="flex flex-col md:flex-row md:justify-between">
-                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">Country</FormLabel>
+                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">
+                  Country
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter country" {...field} />
                 </FormControl>
@@ -166,7 +164,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
             name="telephoneNumber"
             render={({ field }) => (
               <FormItem className="flex flex-col md:flex-row md:justify-between">
-                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">Telephone Number</FormLabel>
+                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">
+                  Telephone Number
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="+1-123-456-7890" {...field} />
                 </FormControl>
@@ -179,7 +179,9 @@ const PatientForm: React.FC<PatientFormProps> = ({
             name="contactEmail"
             render={({ field }) => (
               <FormItem className="flex flex-col md:flex-row md:justify-between">
-                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">Contact Email</FormLabel>
+                <FormLabel className="w-[50%] mr-[100px] lg:mr-[200px] font-bold">
+                  Contact Email
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter contact email" {...field} />
                 </FormControl>
