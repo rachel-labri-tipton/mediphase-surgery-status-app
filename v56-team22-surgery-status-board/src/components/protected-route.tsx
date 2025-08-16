@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ allowedRoles, children }: ProtectedRouteProps) => {
   const { user } = useAuth();
 
-  console.log('ProtectedRoute user:', user);
+  
   //public route
   if (allowedRoles === undefined) {
     return <>{children}</>;
