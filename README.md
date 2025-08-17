@@ -117,13 +117,136 @@ This structure helps keep code modular, maintainable, and easy to navigate as th
 - **Context API for User Authentication and Role Management:**  
   The app uses React’s Context API to manage authentication state and user roles globally, enabling role-based routing and feature access.
 
+  <details>
+  <summary>View code</summary>
+   
+   ```tsx
+   
+  // src/contexts/AuthContext.tsx
+
+  export const AuthContext = createContext<AuthContextType | null>(null);
+  export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<User>(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
+
+  const signIn = (email: string, password: string) => {
+    const storedUser = users.find((credential) => credential.email === email);
+
+    if (!storedUser) {
+      return Promise.reject(new AuthError(INVALID_EMAIL_MSG));
+    }
+
+    if (storedUser.password !== password) {
+      return Promise.reject(new AuthError(INVALID_PASSWORD_MSG));
+    }
+    //eslint-disable-next-line
+    const { password: _, ...userProps } = storedUser as User & {
+      password: string;
+    };
+    setUser(userProps);
+    return Promise.resolve(userProps);
+  };
+
+  const signInAsGuest = () =>
+    setUser({
+      id: uuidv4(),
+      role: 'guest',
+    });
+
+  const signOut = () => setUser(null);
+
+  return (
+    <AuthContext.Provider value={{ user, signIn, signInAsGuest, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
+  };
+  ```
+  </details>
+
 - **Local Storage for Data Persistence:**  
   Patient data and user roles are stored in browser Local Storage.  
   Patient data is initially loaded from a static JSON object, but any changes (add, edit, dismiss) are saved to Local Storage, so updates persist across page refreshes.
+  An example of this is the `updatePatientStatus` method.
+
+  <details>
+  <summary>View code</summary>
+
+  ```tsx
+  
+  // src/utility/patientHelpers.ts
+
+  export function updatePatientStatus(id: string, newStatus: string) {
+  const patients = JSON.parse(localStorage.getItem("patients") || "[]");
+  console.log("Before update:", patients);
+  const idx = patients.findIndex((p: Patient) => p.id === id);
+  if (idx !== -1) {
+    patients[idx].status = newStatus;
+     // Lookup color/message
+     const statusMetaData = statusInfo.find(s => s.status === newStatus);
+     if (statusMetaData) {
+       patients[idx].color = statusMetaData.color;
+       patients[idx].message = statusMetaData.message;
+     }
+    localStorage.setItem("patients", JSON.stringify(patients));
+    console.log("After update:", patients);
+    return patients[idx];
+  }
+  return null;
+  }
+  ```
+  </details>
 
 - **Automatic Table Pagination:**  
   The patient dashboard uses TanStack Table for flexible, filterable, and paginated data display.  
   In **auto mode**, the table automatically moves to the next page after 20 seconds, allowing users in waiting rooms to see all patients in rotation without manual interaction.
+
+  <details>
+  <summary>View code</summary>
+ 
+  ```tsx
+  
+  // src/components/PatientStatusTable/PaginationController.tsx
+  
+  // auto pagination every 15 seconds
+  useEffect(() => {
+    if (paginationMode !== 'auto') {
+      setCountdown(20);
+      return;
+    }
+    setCountdown(20);
+    if (paginationMode !== 'auto') return;
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          const currentPageIndex = table.getState().pagination.pageIndex;
+          const pageCount = table.getPageCount();
+          if (pageCount > 0) {
+            if (currentPageIndex < pageCount - 1) {
+              table.nextPage();
+            } else {
+              table.setPageIndex(0);
+            }
+          }
+          return 20;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [paginationMode, table]);
+  ```
+</details>
 
 - **Dynamic Table and Forms:**  
   The patient dashboard uses TanStack Table for flexible, filterable, and paginated data display.
