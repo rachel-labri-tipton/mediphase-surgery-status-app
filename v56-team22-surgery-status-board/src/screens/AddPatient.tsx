@@ -1,16 +1,15 @@
-
 import { useNavigate } from 'react-router';
 import { patientData } from '@/components/PatientStatusTable/data/patient-data-updated';
-import  {type Patient } from '@/components/PatientStatusTable/data/patient-data-updated';
-import { formSchema } from '@/components/PatientStatusTable/PatientForm';
-
+import { type Patient } from '@/components/PatientStatusTable/data/patient-data-updated';
+import { formSchema } from '@/schemas/formSchemas/patient-formSchema';
 import { toast } from 'sonner';
 import * as z from 'zod';
 import PatientForm from '@/components/PatientStatusTable/PatientForm';
 
 // Function to generate a random 6-character ID
 const generateRandomId = () => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
   for (let i = 0; i < 6; i++) {
     result += characters.charAt(Math.floor(Math.random() * characters.length));
