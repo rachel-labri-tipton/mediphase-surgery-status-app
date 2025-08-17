@@ -7,7 +7,8 @@ import type { TableRole } from "@/constant/patient-table";
 const PatientStatusTable = () => {
   const [userRole, setUserRole] = useState<TableRole>("guest"); // default to guest
   const columns = getColumns(userRole);
-
+  // Filter out dismissed patients
+const filteredPatientData = patientData.filter(patient => patient.status !== 'Dismissal');
 
   return (
 
@@ -34,7 +35,7 @@ const PatientStatusTable = () => {
         </button>
       </div>
    
-        <DataTable columns={columns} data={patientData} role={userRole}/>
+        <DataTable columns={columns} data={filteredPatientData} role={userRole}/>
  
     </div>
   );
