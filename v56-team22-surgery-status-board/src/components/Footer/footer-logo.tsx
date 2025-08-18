@@ -1,7 +1,11 @@
+import { SecondaryLogo } from "../Logos";
+import { useNavigate } from "react-router";
+
 const FooterLogo = () => {
+  const navigate = useNavigate();
   return (
-    <div className="my-4 md:my-0">
-      <div className="text-2xl font-bold text-white">LOGO</div>
+    <div className="md:my-0 cursor-pointer" onClick={() => navigate('/')}>
+      <span><SecondaryLogo className="w-32 h-auto md:w-64"/></span>
     </div>
   );
 };

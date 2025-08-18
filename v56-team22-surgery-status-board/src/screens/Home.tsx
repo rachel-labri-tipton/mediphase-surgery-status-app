@@ -5,12 +5,12 @@ const Home = () => {
   return (
     <div className="px-[30px] md:px-[100px] mt-[100px] flex flex-col justify-center items-center">
       <h1 className="text-4xl font-bold text-center mb-[60px]">
-        Welcome to Appname
+        Welcome to MediPhase
       </h1>
       <p className="text-lg text-center mb-[30px]">
-        Monitor your loved ones' surgery journey with ease. Appname provides
+        Monitor your loved ones' surgery journey with ease. MediPhase provides
         real-time updates on patient status—Checked In, Pre-Procedure, In
-        Progress, Closing, Recovery, Complete and Dismissal <br />
+        Progress, Closing, Recovery, Complete and Dismissed <br />
       </p>
       <p className="text-lg text-center mb-[100px]">
         You stay informed every step of the way. Simple, secure, and

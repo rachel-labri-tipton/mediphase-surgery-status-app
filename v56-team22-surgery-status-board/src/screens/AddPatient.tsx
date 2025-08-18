@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router';
 import { patientData } from '@/components/PatientStatusTable/data/patient-data-updated';
 import  {type Patient } from '@/components/PatientStatusTable/data/patient-data-updated';
-import { formSchema } from '@/components/PatientStatusTable/PatientForm';
+import {formSchema} from '@/schemas/formSchemas/patient-formSchema';
 
 import { toast } from 'sonner';
 import * as z from 'zod';

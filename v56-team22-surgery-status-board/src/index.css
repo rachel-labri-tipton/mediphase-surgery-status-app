@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 :root {
+  --font-jura: 'Jura', sans-serif;
   --background: #fbfdfa;
   --foreground: #1f2937;
   --card: #ffffff;
   --card-foreground: #1f2937;
   --popover: #ffffff;
   --popover-foreground: #1f2937;
-  --primary: #16a34a;
+  --primary: #372C5A;
   --primary-foreground: #ffffff;
   --secondary: #ecfccb;
   --secondary-foreground: #4d7c0f;
