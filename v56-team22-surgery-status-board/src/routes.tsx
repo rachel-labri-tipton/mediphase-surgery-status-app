@@ -14,7 +14,7 @@ const routes = [
     path: '/',
     element: routeWrapper(<MainLayoutWrapper />),
     children: [
-      { index: true, element: routeWrapper(<App />, []) },
+      { index: true, element: <App /> },
       { path: 'sign-in', element: routeWrapper(<SignIn />) },
       { path: 'patient-status', element: routeWrapper(<PatientStatusBoard />) },
       {
