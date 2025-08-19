@@ -9,7 +9,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex flex-col h-screen w-full">
       <Header role={user?.role || "guest"} />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 py-8">{children}</main>
       <Footer />
     </div>
   );
