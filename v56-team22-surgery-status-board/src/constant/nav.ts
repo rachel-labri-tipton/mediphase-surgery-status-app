@@ -12,10 +12,13 @@ export const navByRole: Record<Role, Navlink[]> = {
   surgical: [
     { label: 'Patient Status', href: '/patient-status' },
     { label: 'Update Patient', href: '/update-patient' },
+    { label: 'Sign Out', href: '/sign-out' },
+
   ],
-    admin: [
+  admin: [
         { label: 'Patient Status', href: '/patient-status' },
         { label: 'Update Patient', href: '/update-patient' },
-        {label:"Patient information", href: '/patient-information' },
+      { label: "Patient information", href: '/patient-information' },
+      { label: 'Sign Out', href: '/sign-out' },
     ],
 };

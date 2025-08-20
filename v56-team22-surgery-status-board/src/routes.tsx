@@ -1,6 +1,5 @@
 import App from './App.tsx';
 import SignIn from './components/SignIn/index.tsx';
-import PatientStatusBoard from './screens/PatientStatusBoard.tsx';
 import PatientInformation from './screens/PatientInformation.tsx';
 import PatientStatusUpdate from './screens/PatientStatusUpdate.tsx';
 import MainLayoutWrapper from './layout/MainLayoutWrapper.tsx';
@@ -8,6 +7,7 @@ import ViewDetails from './screens/ViewDetails.tsx';
 import AddPatient from './screens/AddPatient.tsx';
 import UpdateInfo from './screens/UpdateInfo.tsx';
 import { routeWrapper } from './components/route-wrapper.tsx';
+import PatientStatusBoardWrapper from './components/PatientStatusTable/PatientStatusBoardWrapper.tsx';
 
 const routes = [
   {
@@ -16,7 +16,7 @@ const routes = [
     children: [
       { index: true, element: <App /> },
       { path: 'sign-in', element: routeWrapper(<SignIn />) },
-      { path: 'patient-status', element: routeWrapper(<PatientStatusBoard />) },
+      { path: 'patient-status', element: routeWrapper(<PatientStatusBoardWrapper />) },
       {
         path: 'patient-information',
         element: routeWrapper(<PatientInformation />, []),

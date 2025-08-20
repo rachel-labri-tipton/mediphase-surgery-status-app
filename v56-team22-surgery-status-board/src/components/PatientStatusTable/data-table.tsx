@@ -69,8 +69,6 @@ export function DataTable<TData, TValue>({
                 }
                 className="max-w-sm"
               />
-              {/* commenting out for the moment since not part of core features */}
-              {/* <ColumnVisibilityDropdown table={table} /> */}
             </>
           )}
         </div>
