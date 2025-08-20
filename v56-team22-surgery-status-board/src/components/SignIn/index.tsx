@@ -63,7 +63,7 @@ const SignIn = () => {
                   id="email"
                   type="email"
                   name="email"
-                  placeholder="Simran@medisurge.com"
+                  placeholder="Enter your email here..."
                   required
                 />
                 <span className="text-destructive">
@@ -76,7 +76,7 @@ const SignIn = () => {
                   id="password"
                   type="password"
                   name="password"
-                  placeholder="*************"
+                  placeholder="Enter your password here..."
                   required
                 />
                 {error === INVALID_PASSWORD_MSG && error}
