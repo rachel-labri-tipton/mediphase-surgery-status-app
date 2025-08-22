@@ -4,8 +4,8 @@ import { AuthError } from '@/lib/authUtils';
 import type { Role } from '@/constant/nav';
 import { v4 as uuidv4 } from 'uuid';
 
-type User = {
-  id: string;
+export type User = {
+  id?: string;
   email?: string;
   role: Role;
 } | null;
@@ -62,7 +62,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       role: 'guest',
     });
 
-  const signOut = () => setUser(null);
+    const signOut = () => {
+      setUser(null);
+      localStorage.removeItem('user');
+    };
 
   return (
     <AuthContext.Provider value={{ user, signIn, signInAsGuest, signOut }}>
