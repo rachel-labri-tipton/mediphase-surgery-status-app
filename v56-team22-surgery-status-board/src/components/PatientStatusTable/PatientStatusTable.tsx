@@ -10,6 +10,10 @@ type PatientStatusTableProps = {
   role: Role;
 };
 
+function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 const PatientStatusTable = ({ role }: PatientStatusTableProps) => {
   const columns = getColumns(role);
   // Filter out dismissed patients
@@ -17,8 +21,8 @@ const PatientStatusTable = ({ role }: PatientStatusTableProps) => {
 
   return (
 
-    <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6 text-center">Welcome, {role} user. </h1>
+    <div className="container mx-auto">
+      <h1 className="text-3xl font-semibold font-jura mb-6 text-center text-primary pt-5">Welcome, {capitalize(role)} User.</h1>
    
         <DataTable columns={columns} data={filteredPatientData} role={role}/>
  
