@@ -1,14 +1,27 @@
 
 import DateDisplay from './DateDisplay';
-import type { Role } from '@/constant/nav';
 import NavLinks from './Navlinks';
 import MobileNav from './MobileNav';
+import useAuth from '@/hooks/useAuth';
+import { useNavigate } from 'react-router';
 
-const HeaderMenu = ({ role }: { role: Role }) => {
+const HeaderMenu = () => {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const role = user?.role || 'guest';
+
+  const handleSignOut = () => {
+    signOut();
+    navigate('/sign-in');
+  };
+
+  console.log('HeaderMenu render with role:', role);
+
+
   return (
     <>
       <div className="hidden sm:flex items-center gap-6 mr-6">
-        <NavLinks role={role} />
+        <NavLinks user={user}  role={role} onSignOut={handleSignOut} />
         <DateDisplay />
       </div>
 

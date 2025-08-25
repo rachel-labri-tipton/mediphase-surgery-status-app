@@ -1,40 +1,30 @@
-import { useState } from "react";
 import { getColumns } from "./columns";
 import { DataTable } from "./data-table";
 import { patientData } from "./data/patient-data-updated";
-import type { TableRole } from "@/constant/patient-table";
+import type { Role } from "@/constant/nav";
 
-const PatientStatusTable = () => {
-  const [userRole, setUserRole] = useState<TableRole>("guest"); // default to guest
-  const columns = getColumns(userRole);
 
+
+
+type PatientStatusTableProps = {
+  role: Role;
+};
+
+function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+const PatientStatusTable = ({ role }: PatientStatusTableProps) => {
+  const columns = getColumns(role);
+  // Filter out dismissed patients
+ const filteredPatientData = patientData.filter(patient => patient.status !== 'Dismissal');
 
   return (
 
-    <div className="container mx-auto py-10">
-     {/* these buttons are temporary just showing the different table views before implementing the Context API */}
-      <div className="flex gap-2 mb-4 justify-center">
-        <button
-          className={`px-4 py-2 rounded ${userRole === "guest" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
-          onClick={() => setUserRole("guest")}
-        >
-          Guest View
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${userRole === "admin" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
-          onClick={() => setUserRole("admin")}
-        >
-          Admin View
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${userRole === "surgical team" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
-          onClick={() => setUserRole("surgical team")}
-        >
-          Surgical Team View
-        </button>
-      </div>
+    <div className="container mx-auto">
+      <h1 className="text-3xl font-semibold font-jura mb-6 text-center text-primary pt-5">Welcome, {capitalize(role)} User.</h1>
    
-        <DataTable columns={columns} data={patientData} role={userRole}/>
+        <DataTable columns={columns} data={filteredPatientData} role={role}/>
  
     </div>
   );

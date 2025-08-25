@@ -14,7 +14,7 @@ type ColumnVisibilityDropdownProps<TData> = {
 const ColumnVisibilityDropdown = <TData,>({ table }: ColumnVisibilityDropdownProps<TData>) => {
   const columns = table.getAllColumns().filter((column) => column.getCanHide());
   const allVisible = columns.every((col) => col.getIsVisible());
-  const noneVisible = columns.every((col) => !col.getIsVisible());
+  
 
   const handleSelectAll = () => {
     columns.forEach((col) => col.toggleVisibility(true));

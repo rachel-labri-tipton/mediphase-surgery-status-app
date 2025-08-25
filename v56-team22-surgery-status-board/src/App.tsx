@@ -1,10 +1,9 @@
-import MainLayout from './layout/MainLayout';
-import Home from './screens/Home';
+import  Home  from './screens/Home';
 
-const App = () => (
-  <MainLayout>
-    <Home />
-  </MainLayout>
-);
-
+function App() {
+  return (
+        <Home/>
+  );
+}
+        
 export default App;
