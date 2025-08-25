@@ -1,5 +1,5 @@
 import { navByRole, type Role } from '@/constant/nav';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import type { User } from '@/contexts/AuthContext';
 
 type NavLinksProps = {
@@ -7,9 +7,10 @@ type NavLinksProps = {
   user?: User
   onSignOut?: () => void
 };
-const NavLinks = ({ role, onSignOut }: NavLinksProps) => {
+const NavLinks = ({ role, user, onSignOut }: NavLinksProps) => {
   const links = navByRole[role];
   const location = useLocation();
+  const navigate = useNavigate();
 
 
   return (
@@ -34,9 +35,11 @@ const NavLinks = ({ role, onSignOut }: NavLinksProps) => {
     }
     if (link.label === 'Sign In') {
       return (
-        <a
+        <button
           key={link.href}
-          href={link.href}
+          onClick={() => {
+            if (user?.role === 'guest') navigate('/sign-in')
+          }}
           className={`font-bold px-3 py-2 rounded transition
             ${isActive
               ? 'underline underline-offset-4 text-primary cursor-default'
@@ -44,12 +47,12 @@ const NavLinks = ({ role, onSignOut }: NavLinksProps) => {
             }`}
         >
           Sign In
-        </a>
+        </button>
       );
     }
-        return(<a
+        return(<button
           key={link.href}
-          href={link.href}
+          onClick={() => navigate(link.href)}
           className={`font-bold px-3 py-2 rounded transition
             ${isActive
               ? 'underline underline-offset-4 text-primary cursor-default'
@@ -57,7 +60,7 @@ const NavLinks = ({ role, onSignOut }: NavLinksProps) => {
             }`}
         >
           {link.label}
-        </a>)
+        </button>)
         
       })}
     </>
