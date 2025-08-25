@@ -26,13 +26,13 @@ const devNames = [
 ];
 
 const pages = [
-  { name: 'Home', href: '#' },
-  { name: 'About', href: '#' },
+  { name: 'Home', href: '/' },
+  { name: 'Patient Status Board', href: '/patient-status' },
 ];
 
 const Footer = () => {
   return (
-    <footer className="w-full px-4 py-8 bg-primary text-gray-800">
+    <footer className="w-full px-4 py-8 bg-primary text-white">
       <div className="flex flex-col md:flex-row justify-between items-start w-full max-w-6xl mx-auto gap-8">
         <div className="w-full md:w-1/3 flex justify-center md:justify-start">
           <FooterLogo />
