@@ -8,7 +8,7 @@ const PatientStatusUpdate = () => {
   const [foundPatient, setFoundPatient] = useState<Patient | null>(null);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center py-10">
       <h1 className="text-4xl font-bold mb-4">Update Patient Status</h1>
       {!foundPatient ? (
           <FindPatientForm onFound={setFoundPatient} />

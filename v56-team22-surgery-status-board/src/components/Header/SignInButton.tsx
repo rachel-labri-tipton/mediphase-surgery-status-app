@@ -1,20 +1,23 @@
 import { Button } from "@/components/ui/button";
+import type { User } from "@/contexts/AuthContext";
 
-type SignInOutButtonProps = {
+
+type SignInButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  user?: { role?: string };
+  user?: User
 };
 
-const SignInOutButton: React.FC<SignInOutButtonProps> = ({ onClick, user }) => {
+const SignInButton: React.FC<SignInButtonProps> = ({ onClick, user }) => {
+  const isGuest = user?.role === 'guest';
   return (
     <Button
       onClick={onClick}
       variant="outline"
       className="w-full font-bold text-primary cursor-pointer hover:scale-105 transition-transform"
     >
-      {user && user.role !== 'guest' ? 'Sign Out' : 'Sign In'}
+      {isGuest ? 'Sign In' : 'Sign Out'}
     </Button>
   );
 };
 
-export default SignInOutButton;
+export default SignInButton;

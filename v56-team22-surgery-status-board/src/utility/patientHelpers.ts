@@ -6,10 +6,29 @@ import type { Patient } from '@/components/PatientStatusTable/data/patient-data-
 export function initPatientsIfNeeded() {
   if (!localStorage.getItem("patients")) {
     localStorage.setItem("patients", JSON.stringify(patientData));
+    localStorage.setItem("patients_version", "1"); // or use a timestamp
+    localStorage.setItem("patients_last_updated", Date.now().toString());
   }
 }
 
+export function isPatientDataOld(currentVersion: string = "1", maxAgeMs: number = 1000 * 60 * 60 * 24) {
+  const storedVersion = localStorage.getItem("patients_version");
+  const lastUpdated = parseInt(localStorage.getItem("patients_last_updated") || "0", 10);
+  const now = Date.now();
+
+  // Check version
+  if (storedVersion !== currentVersion) return true;
+
+  // Check age
+  if (now - lastUpdated > maxAgeMs) return true;
+
+  return false;
+}
+
 export function getPatients(): Patient[] {
+  if (isPatientDataOld("1")) {
+    initPatientsIfNeeded();
+  }
   return JSON.parse(localStorage.getItem("patients") || "[]");
 }
 

@@ -45,7 +45,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex flex-col items-center py-16">
       <Card className="w-full max-w-md py-12 px-8">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <CardHeader>
@@ -92,7 +92,7 @@ const SignIn = () => {
               variant="outline"
               className="w-full"
             >
-              Sign in as a guest
+              Guest Sign In
             </Button>
           </CardFooter>
         </form>
