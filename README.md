@@ -1,10 +1,14 @@
 # MediPhase 
 
+![mediphase-logo](./assets/mediphase-logo.png)
+
 MediPhase is a surgery status app that helps medical teams monitor a patient's surgery journey with ease. MediPhase provides real-time updates on surgical patient status. 
 
 MediPhase offers simple, secure, and compassionate care at your medical team's fingertips.
 
-**Deployed App**: (add link)
+![mediphase-app-homepage](./assets/mediphase-app-homepage.png)
+
+**Deployed App**: [MediPhase](https://mediphase-surgery-status-app.vercel.app/)
 
 ## Project Overview 
 
@@ -51,7 +55,17 @@ Mediphase uses the following tech stack and core dependencies:
 
 ## UI/UX Design 
 
+The team used **Figma** to create wireframes to develop the design and interactivity of the app. 
 
+![Figma Wireframes](./assets/figma-wireframes.png)
+
+Figma was also used to create UML diagrams that helped us better understand user processes and workflows for guest, admin and surgical team stories. 
+
+![guest-user-workflow](./assets/guest-uml-diagram.png)
+
+![admin-user-workflow](./assets/admin-uml-diagram.png)
+
+![surgical-team-user-workflow](./assets/surgical-team-uml-diagram.png)
 
 ## Features 
 
@@ -292,6 +306,9 @@ Here are a few TODOs that are left at the end of the project:
 - [ ] Playwright or Cypress Testing: There was an idea to add frontend testing to the app, but it wasn't completed by the deadline. 
 - [ ] Gemini AI Integration with a Chatbot (the chatbot is designed, not implemented). 
 
+![chatbot-design](./assets/chatbot-design-1.png)
+![chatbot-design](./assets/chatbot-design-2.png)
+
 ## Our Team
 
 We are 4 developers living in 4 different countries brought together by Chingu Voyage 56 in early July 2025. 
@@ -311,7 +328,11 @@ It's hard to dedicate time in a busy schedule to a side project. And everyone on
 Here are the wins our team had over the course of the voyage: 
 
 - Building an app in community with others and sharing our knowledge with each other. 
-- Gaining a better understanding of Agile Methodologies in practice. 
+- Gaining a better understanding of Agile Methodologies in practice. As a team, we had weekly sprint planning, review and retro meetings. Some of the tools we used were **Easy Retro** and **GitHub Projects** to help organize work. 
+
+![github-project-board](./assets/github-project.png)
+
+![easy-retro-board](./assets/retro-board.png)
 
 
 ### Challenges
