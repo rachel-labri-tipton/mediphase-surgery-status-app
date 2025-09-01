@@ -7,10 +7,13 @@ type NavLinksProps = {
   user?: User
   onSignOut?: () => void
 };
-const NavLinks = ({ role, user, onSignOut }: NavLinksProps) => {
+const NavLinks = ({ role, onSignOut }: NavLinksProps) => {
   const links = navByRole[role];
   const location = useLocation();
   const navigate = useNavigate();
+  const storedUser = JSON.parse(localStorage.getItem('user') || 'null');
+  const isGuest = storedUser?.role === 'guest';
+  const noStoredUser = !storedUser;
 
 
   return (
@@ -33,20 +36,20 @@ const NavLinks = ({ role, user, onSignOut }: NavLinksProps) => {
         </button>
       );
     }
-    if (link.label === 'Sign In') {
+    if (link.label === 'Sign In' && isGuest) {
       return (
         <button
           key={link.href}
-          onClick={() => {
-            if (user?.role === 'guest') navigate('/sign-in')
-          }}
+          onClick={() => 
+            navigate('/sign-in')
+          }
           className={`font-bold px-3 py-2 rounded transition
             ${isActive
               ? 'underline underline-offset-4 text-primary cursor-default'
               : 'text-primary hover:underline underline-offset-4'
             }`}
         >
-          Sign In
+          Guest Sign In 
         </button>
       );
     }

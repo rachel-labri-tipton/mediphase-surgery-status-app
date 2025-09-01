@@ -145,9 +145,6 @@ export const patientData: Patient[] = [
     telephoneNumber: "+33-1-5555-0010",
     contactEmail: "julia.moore.contact@example.com",
   },
-  // ...repeat similar structure for 110 more patients with unique IDs...
-  
-  // Example for the last few:
   {
     id: "QAZ118",
     name: "Zane Young",
