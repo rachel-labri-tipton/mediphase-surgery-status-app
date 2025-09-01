@@ -91,7 +91,7 @@ function PaginationController<TData>({
   };
 
   return (
-    <div className="flex justify-between items-center gap-4 py-4">
+    <div className="flex flex-wrap md:flex-nowrap justify-between items-center gap-4 py-4 w-full overflow-x-auto">
       <div className="text-sm text-gray-600">
         {totalItems > 0
           ? `${startIndex}-${endIndex} of ${totalItems} row(s)`
