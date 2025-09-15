@@ -1,3 +1,4 @@
+import Prompt from '../Prompt/Prompt';
 import DeveloperItems from './developer-items';
 import FooterLogo from './footer-logo';
 import GithubProjectLink from './github-project-link';
@@ -47,6 +48,7 @@ const Footer = () => {
       <div className="mt-6 w-full flex justify-center">
         <GithubProjectLink />
       </div>
+      <Prompt />
     </footer>
   );
 };
